@@ -1,3 +1,5 @@
+package org.rodriguez.corp;
+
 import java.util.Date;
 
 public class Task {
