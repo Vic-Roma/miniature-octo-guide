@@ -6,7 +6,25 @@ public class Task {
 
     Date date;
     String activity;
-    int member;
+    String member;
+
+
+    public Task(String activity, String member){
+        this.date = new Date();
+        this.member = member;
+        this.activity = activity;
+    }
+
+
+    public String print(){
+        // Que es ese \n?
+        //para hacer un salto de linea :0 o todo en una sola linea?
+        //
+        return "Actividy: " + activity + " " +
+                "\n"+ "Date: " + date  +
+                "\n" + "Person in charge: " + member +
+                "\n";
+    }
 
 
 }
