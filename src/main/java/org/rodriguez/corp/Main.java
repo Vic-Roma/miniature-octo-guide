@@ -3,23 +3,20 @@ package org.rodriguez.corp;
 public class Main {
     public static void main(String[] args) {
 
-        Member meche = new Member("Meche");
-        Member lalo = new Member("Lalo");
         Member migue = new Member("Migue");
+        Member vic = new Member("Victor");
 
 
+        Task task1 = new Task("lavar platos", migue);
+        Task task2 = new Task("Barrer patio");
 
-
-        Task task1 = new Task("limpiar mesa", meche.getName());
-        Task task2 = new Task("barrer cocina", lalo.getName());
-        Task task3 = new Task("lavar platos", migue.getName());
-        Family family1 = new Family();
-
-
+        vic.setActivity(task2);
+        task2.setMember(vic);
+        vic.setName("Victor Hugo");
 
         System.out.println(task1.print());
         System.out.println(task2.print());
-        System.out.println(task3.print());
+
 
 
     }
