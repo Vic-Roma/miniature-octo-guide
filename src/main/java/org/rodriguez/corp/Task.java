@@ -7,17 +7,17 @@ public class Task {
     String activity;
     Member member;
 
-    public Task(){
-        this.activity = "actividad no asignada";
-        this.date = new Date();
-
-
-    }
-
-    public Task(String activity){
-        this.activity = activity;
-        this.date = new Date();
-    }
+//    public Task(){
+//        this.activity = "actividad no asignada";
+//        this.date = new Date();
+//
+//
+//    }
+//
+//    public Task(String activity){
+//        this.activity = activity;
+//        this.date = new Date();
+//    }
 
     public Task(String activity, Member member) {
         this.date = new Date();

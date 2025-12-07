@@ -8,10 +8,9 @@ public class Main {
 
 
         Task task1 = new Task("lavar platos", migue);
-        Task task2 = new Task("Barrer patio");
+        Task task2 = new Task("Barrer patio",vic);
 
         vic.setActivity(task2);
-        task2.setMember(vic);
         vic.setName("Victor Hugo");
 
         System.out.println(task1.print());
