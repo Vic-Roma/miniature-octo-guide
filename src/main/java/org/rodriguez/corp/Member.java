@@ -4,9 +4,6 @@ public class Member {
 
     private String name;
     private Task activity;
-    //int familyID;
-    //String activity;
-
 
     public Member(){
         this("persona",null);
@@ -21,7 +18,6 @@ public class Member {
         this.activity = activity;
     }
 
-    // MIGUEL: Bien, a esto se le llama GETTER
     public String getName(){
         return this.name;
     }
@@ -37,8 +33,6 @@ public class Member {
 
     public void setActivity(Task activity){
         this.activity = activity;
-
-
     }
 }
 
