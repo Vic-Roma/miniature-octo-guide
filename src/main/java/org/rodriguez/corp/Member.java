@@ -9,11 +9,11 @@ public class Member {
 
 
     public Member(){
-        this.name = "Persona";
+        this("persona",null);
     }
 
     public Member(String name){
-        this.name = name;
+        this(name,null);
     }
 
     public Member(String name, Task activity){
@@ -37,7 +37,7 @@ public class Member {
 
     public void setActivity(Task activity){
         this.activity = activity;
-        getName();
+
 
     }
 }

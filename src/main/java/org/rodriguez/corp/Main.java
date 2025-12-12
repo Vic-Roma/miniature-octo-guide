@@ -6,7 +6,6 @@ public class Main {
         Member migue = new Member("Migue");
         Member vic = new Member("Victor");
 
-
         Task task1 = new Task("lavar platos", migue);
         Task task2 = new Task("Barrer patio",vic);
 
@@ -15,8 +14,5 @@ public class Main {
 
         System.out.println(task1.print());
         System.out.println(task2.print());
-
-
-
     }
 }
