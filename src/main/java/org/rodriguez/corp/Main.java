@@ -14,5 +14,11 @@ public class Main {
 
         System.out.println(task1.print());
         System.out.println(task2.print());
+        System.out.println(task1.print());
+
+//        Task task3 = new Task("HOLA",migue);
+//        Task task4 = new Task("Miguel",vic);
     }
+
+
 }
