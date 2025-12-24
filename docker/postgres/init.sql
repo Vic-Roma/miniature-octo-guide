@@ -11,11 +11,10 @@ VALUES ('Meche'),
         ('Migue'),
         ('Lalo');
 
-CREATE TABLE tasks
-(
-    id_task     SERIAL PRIMARY KEY,
+CREATE TABLE tasks (
+    id_task SERIAL PRIMARY KEY,
     description varchar(255) NOT NULL,
-    asignee     int REFERENCES members (id)
+    asignee int REFERENCES members(id)
 );
 
 INSERT INTO tasks(description,asignee)
@@ -28,8 +27,3 @@ VALUES('lavar platos',1),
       ('Limpiar bano',2),
       ('Acomodar Sillones', 4),
       ('Asear perritas',5);
-
-SELECT * FROM members;
-SELECT * FROM tasks;
-
-DROP TABLE tasks;

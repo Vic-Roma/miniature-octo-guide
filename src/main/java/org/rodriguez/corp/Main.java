@@ -1,11 +1,7 @@
 package org.rodriguez.corp;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 public class Main {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
 
         Member migue = new Member("Migue");
         Member vic = new Member("Victor");
@@ -20,17 +16,8 @@ public class Main {
         System.out.println(task2.print());
         System.out.println(task1.print());
 
-            String url = "jdbc:postgresql://localhost:5432/postgres";
-            String user = "app_user";
-            String password = "app_password";
-
-            try (Connection conn = DriverManager.getConnection(url, user, password)) {
-                System.out.println("Connected to PostgreSQL");
-            }
-
-
-
-
+//        Task task3 = new Task("HOLA",migue);
+//        Task task4 = new Task("Miguel",vic);
     }
 
 
