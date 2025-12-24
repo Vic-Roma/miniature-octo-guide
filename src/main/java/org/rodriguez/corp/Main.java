@@ -26,11 +26,7 @@ public class Main {
 
         try (Connection conn = DriverManager.getConnection(url, user, password)) {
             System.out.println("Connected to PostgreSQL");
-
-
         }
-
-
     }
 }
 
