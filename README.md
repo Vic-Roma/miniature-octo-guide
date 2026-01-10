@@ -1,10 +1,10 @@
 # Family Manager
 
-A Java-based task management application for family members with PostgreSQL database backend.
+A Java-based task management application for family memberDtos with PostgreSQL database backend.
 
 ## Project Overview
 
-This application helps manage tasks and assignments for family members. It uses Java 17 with Maven for dependency management and Docker Compose for running a PostgreSQL database.
+This application helps manage tasks and assignments for family memberDtos. It uses Java 17 with Maven for dependency management and Docker Compose for running a PostgreSQL database.
 
 **Note:** Database connectivity from the Java application will be added in a future update. This setup currently focuses on infrastructure only.
 

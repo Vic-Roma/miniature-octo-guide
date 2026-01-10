@@ -4,9 +4,6 @@ public class Member {
 
     private String name;
     private Task activity;
-    //int familyID;
-    //String activity;
-
 
     public Member(){
         this("persona",null);

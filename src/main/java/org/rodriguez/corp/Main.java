@@ -3,30 +3,39 @@ package org.rodriguez.corp;
 import java.sql.*;
 
 public class Main {
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
 
-        String url = "jdbc:postgresql://localhost:5432/app_db";
+        //Datos de conexion a la base de datos
+        String url = "jdbc:postgresql://localhost:5432/postgres";
         String user = "app_user";
         String password = "app_password";
 
-        String sql = "SELECT * FROM members";
 
-        try (Connection conn = DriverManager.getConnection(url, user, password);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+        try( Connection conn = DriverManager.getConnection(url, user, password)){
 
-             System.out.println("Connected to PostgreSQL");
+            MemberDao member = new MemberDao(conn);
+            member.pruebaConexion();
+            member.getMemberByID(2);
 
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
+            System.out.println();
+            member.getMembers();
+            System.out.println();
 
-                System.out.println(id + " | " + name);
-            }
+
+            //modificar todos los datos de miembro por id
+//            member.updateByID(1,"Meche","Cocinar");
+//            member.getMemberByID(1);
+//            System.out.println();
+//            member.getMembers();
+
+            //Modificar task por id
+            member.updateTaskByID(1,"Cocinar");
+            member.getMembers();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 }
 
