@@ -1,6 +1,10 @@
 package org.rodriguez.corp;
 
+import com.sun.source.tree.ReturnTree;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MemberDao {
     private final Connection conn;
@@ -15,9 +19,29 @@ public class MemberDao {
 
     }
 
+    //Insert
+    public void createMember(String name){
+
+        String sql = "INSERT INTO members (name) VALUES (?)";
+
+        try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setString(1,name);
+            pstmt.executeUpdate();
+
+        }  catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     //READ
-    public void getMemberByID(int id){
+    //Retorna un el miembro asignado al id
+    public Member getMemberByID(int id){
+        Member member = new Member();
         String sql = "SELECT * FROM members WHERE id = ?";
+        int i=0;
+        List<Member> members = new ArrayList<>();
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -26,34 +50,41 @@ public class MemberDao {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                int idMember = rs.getInt("id");
-                String name = rs.getString("name");
-                String task = rs.getString("task");
+                member.setId( rs.getInt("id") );
+                member.setName( rs.getString("name") );
+                member.setActivity( rs.getString("task"));
 
-                System.out.println(idMember + " - " + name + " - " + task );
             }
         }  catch (SQLException e) {
             e.printStackTrace();
         }
+        return member;
     }
 
-    public void getMembers(){
+    public List<Member> getMembers(){
 
         String selectSql = "SELECT * FROM members ORDER BY id";
+        List<Member> members = new ArrayList<>();
+
 
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(selectSql)) {
 
             //loop para imprimir datos de tabla
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String task = rs.getString("task");
-                System.out.println(id + " | " + name + " | " + task);
+                Member member = new Member();
+                member.setId(rs.getInt("id"));
+                member.setName(rs.getString("name"));
+                member.setActivity(rs.getString("task"));
+
+                members.add(member);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return members;
     }
 
     //Update
@@ -111,11 +142,7 @@ public class MemberDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-
-
-
 }
 
 
