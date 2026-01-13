@@ -1,7 +1,5 @@
 package org.rodriguez.corp;
 
-import com.sun.source.tree.ReturnTree;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +38,6 @@ public class MemberDao {
     public Member getMemberByID(int id){
         Member member = new Member();
         String sql = "SELECT * FROM members WHERE id = ?";
-        int i=0;
-        List<Member> members = new ArrayList<>();
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -89,6 +85,7 @@ public class MemberDao {
 
     //Update
     //Actualiza informacion de un miembro por id
+
     public void updateByID(int id,String name, String task){
 
         String updateByIdSql = "UPDATE members " +

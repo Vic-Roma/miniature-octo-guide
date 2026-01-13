@@ -41,7 +41,7 @@ public class Main {
             System.out.println();
 
 //            Extrae todos los miembros obteniendolso de la base de datos a traves del DAO
-//            y los imprimes en consola
+//            y los imprime en consola
             List<Member> members = memberDao.getMembers();
             for(Member m:members){
                 System.out.println(m.getId()+ " | " + m.getName() + " | " + m.getTask());
