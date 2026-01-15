@@ -3,21 +3,25 @@ package org.rodriguez.corp;
 import java.util.Date;
 
 public class Task {
-    Date date;
-    String activity;
-    Member member;
+
+    private int taskId;
+    //private Date date;
+    private String activity;
+    private Member member;
 
     public Task(String activity, Member member) {
-        this.date = new Date();
+        //this.date = new Date();
         this.member = member;
         this.activity = activity;
     }
 
     public String print() {
         return "Activity: " + activity + " " +
-                "\n" + "Date: " + date +
                 "\n" + "Person in charge: " + member.getName() +
                 "\n";
+    }
+    public void setTaskId(int taskId){
+        this.taskId = taskId;
     }
 
     public void setActivity(String activity){
@@ -35,5 +39,10 @@ public class Task {
     public String getMember(){
         return this.member.getName();
     }
+
+    public int getTaskId(){
+        return this.taskId;
+    }
+
 
 }

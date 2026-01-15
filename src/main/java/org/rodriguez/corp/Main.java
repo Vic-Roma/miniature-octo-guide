@@ -1,32 +1,57 @@
 package org.rodriguez.corp;
 
+import javax.annotation.processing.SupportedSourceVersion;
+import javax.swing.*;
+import java.awt.print.Printable;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
 
-        String url = "jdbc:postgresql://localhost:5432/app_db";
+        //Datos de conexion a la base de datos
+        String url = "jdbc:postgresql://localhost:5432/postgres";
         String user = "app_user";
         String password = "app_password";
 
-        String sql = "SELECT * FROM members";
+        try( Connection conn = DriverManager.getConnection(url, user, password)){
 
-        try (Connection conn = DriverManager.getConnection(url, user, password);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+            MemberDao memberDao = new MemberDao(conn);
 
-             System.out.println("Connected to PostgreSQL");
+////            Metodos creados en MembersDao:
 
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
+////            createMember(String name)
+////            getMemberByID(int id)
+////            getMembers()
+////            updateByID(int id,String name, String task)
+////            updateTaskByID(int id, String task)
+////            deleteById(int id)
 
-                System.out.println(id + " | " + name);
+//            Extrae un miembro obteniendolo de la base de datos a traves del DAO
+//            y lo imprime en consola
+            memberDao.pruebaConexion();
+            Member member1 = memberDao.getMemberByID(1);
+
+            System.out.println(
+                    member1.getId() + " | " +
+                    member1.getName() + " | "  +
+                    member1.getTask()
+            );
+            System.out.println();
+
+//            Extrae todos los miembros obteniendolso de la base de datos a traves del DAO
+//            y los imprime en consola
+            List<Member> members = memberDao.getMembers();
+            for(Member m:members){
+                System.out.println(m.getId()+ " | " + m.getName() + " | " + m.getTask());
             }
+
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 }
 

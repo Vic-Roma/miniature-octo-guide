@@ -2,11 +2,9 @@ package org.rodriguez.corp;
 
 public class Member {
 
+    private int id;
     private String name;
-    private Task activity;
-    //int familyID;
-    //String activity;
-
+    private String task;
 
     public Member(){
         this("persona",null);
@@ -16,29 +14,37 @@ public class Member {
         this(name,null);
     }
 
-    public Member(String name, Task activity){
+    public Member(String name, String task){
         this.name = name;
-        this.activity = activity;
+        this.task = task;
     }
 
     // MIGUEL: Bien, a esto se le llama GETTER
+    public int getId(){
+        return this.id;
+    }
+
     public String getName(){
         return this.name;
     }
 
-    public String getActivity(){
-        return this.activity.getActivity();
+    public String getTask(){
+        return this.task;
     }
+
 
     // SETTER
     public void setName(String name){
         this.name = name;
     }
 
-    public void setActivity(Task activity){
-        this.activity = activity;
+    public void setActivity(String task){
+        this.task = task;
 
+    }
 
+    public void setId(int id){
+        this.id = id;
     }
 }
 
