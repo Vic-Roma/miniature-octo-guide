@@ -12,3 +12,9 @@ public class TaskDao {
     }
 
 }
+
+// OOP
+// Inheritance - Create a copy.
+// Encapsulation - You're creating a context.
+// Abstraction - You make information and behavior available
+// Polymorphism  - You can change or manipulate a class behavior.

@@ -31,7 +31,10 @@ public class Main {
 //            Extrae un miembro obteniendolo de la base de datos a traves del DAO
 //            y lo imprime en consola
             memberDao.pruebaConexion();
-            Member member1 = memberDao.getMemberByID(1);
+            Member member1 = memberDao.getMemberByID(2);
+
+            // if member1.getName() === "Juan"
+            // member1.setName("Juanito")
 
             System.out.println(
                     member1.getId() + " | " +
@@ -39,6 +42,8 @@ public class Main {
                     member1.getTask()
             );
             System.out.println();
+
+            // OOP
 
 //            Extrae todos los miembros obteniendolso de la base de datos a traves del DAO
 //            y los imprime en consola

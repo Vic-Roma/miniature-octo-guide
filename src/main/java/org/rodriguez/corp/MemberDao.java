@@ -14,7 +14,6 @@ public class MemberDao {
 
     public void pruebaConexion()   {
         System.out.println("Connected to PostgreSQL");
-
     }
 
     //Insert
