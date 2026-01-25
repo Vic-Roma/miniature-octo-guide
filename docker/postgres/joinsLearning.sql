@@ -214,13 +214,30 @@ FROM courses c
 LEFT JOIN enrollments e on e.course_id = c.course_id
 GROUP BY c.course_code, c.title;
 
+
+WITH x AS (
 SELECT
     e.student_id,
     s.full_name,
     e.course_id,
     e.grade,
-    row_number() over (PARTITION BY e.student_id ORDER BY e.grade DESC)
+    dense_rank() over (PARTITION BY e.student_id ORDER BY e.grade DESC) as ds
 FROM enrollments e
 INNER JOIN students s on e.student_id = s.student_id
 WHERE e.grade IS NOT NULL
-ORDER BY s.student_id,e.grade DESC;
+
+)
+
+SELECT
+    t.student_id,
+    t.full_name,
+    t.course_id,
+    c.title,
+    t.grade
+FROM x as t
+INNER JOIN courses c ON t.course_id = c.course_id
+WHERE ds = 1;
+
+
+
+

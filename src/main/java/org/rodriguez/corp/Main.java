@@ -1,11 +1,8 @@
 package org.rodriguez.corp;
 
-import javax.annotation.processing.SupportedSourceVersion;
-import javax.swing.*;
-import java.awt.print.Printable;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,48 +12,84 @@ public class Main {
         String user = "app_user";
         String password = "app_password";
 
+        Scanner scanner = new Scanner(System.in);
+
         try( Connection conn = DriverManager.getConnection(url, user, password)){
 
             MemberDao memberDao = new MemberDao(conn);
+            int numberInput;
+            String textInput;
 
-////            Metodos creados en MembersDao:
+            int selectInput;
 
-////            createMember(String name)
-////            getMemberByID(int id)
-////            getMembers()
-////            updateByID(int id,String name, String task)
-////            updateTaskByID(int id, String task)
-////            deleteById(int id)
+           do{
+                System.out.println("Selecciona Opcion" + "\n" +
+                        "1) Agregar Resistro" + "\n" +
+                        "2) Leer todos los registros" + "\n" +
+                        "3) Modificar Registro por id" + "\n" +
+                        "4) Borrar Registro por id" + "\n" +
+                        "5) Salir"
+                );
 
-//            Extrae un miembro obteniendolo de la base de datos a traves del DAO
-//            y lo imprime en consola
-            memberDao.pruebaConexion();
-            Member member1 = memberDao.getMemberByID(2);
+                selectInput = scanner.nextInt();
+                scanner.nextLine();
 
-            // if member1.getName() === "Juan"
-            // member1.setName("Juanito")
+                switch (selectInput) {
+                    case 1:
 
-            System.out.println(
-                    member1.getId() + " | " +
-                    member1.getName() + " | "  +
-                    member1.getTask()
-            );
-            System.out.println();
+                        //Insertar miembro
+                        System.out.println("Escribe nombre");
+                        textInput = scanner.nextLine();
+                        memberDao.createMember(textInput);
+                        System.out.println("Miembro agregado");
 
-            // OOP
+                        break;
+                    case 2:
 
-//            Extrae todos los miembros obteniendolso de la base de datos a traves del DAO
-//            y los imprime en consola
-            List<Member> members = memberDao.getMembers();
-            for(Member m:members){
-                System.out.println(m.getId()+ " | " + m.getName() + " | " + m.getTask());
-            }
+                        //Leer Registros
+                        List<Member> members = memberDao.getMembers();
+                        for(Member m:members){
+                            System.out.println(m.getId()+ " | " + m.getName() + " | " + m.getTask());
+                        }
 
+                        break;
+                    case 3:
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+                        //Modifica Registro
+                        System.out.println("Escribe id");
+                        numberInput = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println("modificar nombre");
+                        textInput = scanner.nextLine();
+                        memberDao.updateByID(numberInput,textInput,null);
+                        System.out.println("regristro modificado");
+
+                        break;
+                    case 4:
+
+                        //Borra Registro por id
+                        System.out.println("Escribe id");
+                        numberInput = scanner.nextInt();
+                        scanner.nextLine();
+                        memberDao.deleteById(numberInput);
+                        System.out.println("Registro Borrado");
+
+                        break;
+                    case 5:
+                        break;
+
+                }
+
+               System.out.println();
+            }while(selectInput<5);
+
+            System.out.println("Programa Terminado");
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
     }
 }
+
+
 
