@@ -11,7 +11,6 @@ VALUES ('Meche'),
         ('Migue'),
         ('Lalo');
 
-
 CREATE TABLE tasks (
     id_task SERIAL PRIMARY KEY,
     description varchar(255) NOT NULL,

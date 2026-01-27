@@ -14,7 +14,6 @@ public class MemberDao {
 
     public void pruebaConexion()   {
         System.out.println("Connected to PostgreSQL");
-
     }
 
     //Insert
@@ -99,7 +98,7 @@ public class MemberDao {
            pstmt.setInt(3,id);
            pstmt.executeUpdate();
 
-           System.out.println("Information Modificated");
+          // System.out.println("Information Modificated");
 
        } catch (SQLException e) {
            e.printStackTrace();

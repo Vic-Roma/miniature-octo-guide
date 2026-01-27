@@ -1,5 +1,7 @@
 package org.rodriguez.corp;
 
+import java.util.List;
+
 public class Member {
 
     private int id;
@@ -46,6 +48,8 @@ public class Member {
     public void setId(int id){
         this.id = id;
     }
+
+
 }
 
 
