@@ -115,3 +115,129 @@ INSERT INTO enrollments (student_id, course_id, grade) VALUES
                                                            (22,3,90),(22,1,78),
                                                            (23,2,84),(23,5,80),
                                                            (24,6,86),(24,8,90);
+
+
+SELECT
+    student_id,
+    course_id,
+    grade,
+    max(grade) OVER (PARTITION BY course_id)
+FROM enrollments
+ORDER BY course_id;
+
+WITH x AS(
+SELECT
+    course_id,
+    count(student_id) OVER (PARTITION BY course_id) as TotalStudents,
+    row_number() OVER(PARTITION BY course_id ORDER BY course_id) as rn
+FROM enrollments
+ORDER BY course_id)
+
+SELECT
+    course_id,
+    TotalStudents
+FROM x
+WHERE rn = 1;
+
+
+SELECT
+    student_id,
+    course_id,
+    grade,
+    row_number() over (PARTITION BY course_id ORDER BY grade DESC) as rn
+FROM enrollments;
+
+
+SELECT
+    cp.course_id,
+    c.course_code,
+    c.title
+FROM courses as c
+LEFT JOIN course_professors AS cp ON c.course_id = cp.course_id
+WHERE cp.professor_id IS NULL;
+
+
+SELECT
+    p.professor_id,
+    p.full_name,
+    p.email
+FROM professors AS p
+LEFT JOIN course_professors as cp ON p.professor_id = cp.professor_id
+WHERE cp.professor_id IS NULL;
+
+SELECT
+    s.student_id,
+    s.full_name
+FROM students AS s
+LEFT JOIN enrollments e on s.student_id = e.student_id
+WHERE e.course_id IS NULL;
+
+
+SELECT DISTINCT e.student_id
+FROM enrollments e
+WHERE EXISTS (
+    SELECT 1
+    FROM course_professors cp
+    WHERE cp.course_id = e.course_id
+    GROUP BY cp.course_id
+    HAVING COUNT(*) > 1
+);
+
+SELECT DISTINCT s.student_id
+FROM enrollments s
+WHERE EXISTS(SELECT 1
+             FROM course_professors cp
+             WHERE cp.course_id = S.course_id
+             GROUP BY cp.course_id
+             HAVING count(*) > 1);
+
+SELECT
+    e.student_id,
+    e.course_id,
+    e.grade,
+    row_number() over (PARTITION BY e.course_id ORDER BY grade DESC)
+FROM enrollments as e;
+
+SELECT
+    e.student_id,
+    e.course_id,
+    e.grade,
+    rank() OVER (PARTITION BY course_id ORDER BY grade DESC) rank_pos,
+    dense_rank() OVER(PARTITION BY course_id ORDER BY grade DESC) as dense_rank_pos
+FROM enrollments e;
+
+SELECT
+    c.course_code,
+    c.title,
+    count( e.student_id) as totalStudent
+FROM courses c
+LEFT JOIN enrollments e on e.course_id = c.course_id
+GROUP BY c.course_code, c.title;
+
+
+WITH x AS (
+SELECT
+    e.student_id,
+    s.full_name,
+    e.course_id,
+    e.grade,
+    dense_rank() over (PARTITION BY e.student_id ORDER BY e.grade DESC) as ds
+FROM enrollments e
+INNER JOIN students s on e.student_id = s.student_id
+WHERE e.grade IS NOT NULL
+
+)
+
+SELECT
+    t.student_id,
+    t.full_name,
+    t.course_id,
+    c.title,
+    t.grade
+FROM x as t
+INNER JOIN courses c ON t.course_id = c.course_id
+WHERE ds = 1;
+
+
+
+
