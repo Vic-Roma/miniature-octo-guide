@@ -1,7 +1,6 @@
 services:
   postgres:
     image: postgres:17
-    container_name: family_manager_db
     restart: unless-stopped
     environment:
       POSTGRES_DB: app_db
@@ -17,6 +16,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
 
 volumes:
   postgres_data:
