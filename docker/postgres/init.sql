@@ -27,3 +27,19 @@ VALUES('lavar platos',1),
       ('Limpiar bano',2),
       ('Acomodar Sillones', 4),
       ('Asear perritas',5);
+
+CREATE OR REPLACE PROCEDURE get_members_starting_with_m(
+    IN p_limit INT DEFAULT 10,
+    INOUT p_result REFCURSOR DEFAULT 'members_m_cursor'
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    OPEN p_result FOR
+        SELECT id, name, task
+        FROM members
+        WHERE name ILIKE 'm%'
+        ORDER BY name
+        LIMIT p_limit;
+END;
+$$;
